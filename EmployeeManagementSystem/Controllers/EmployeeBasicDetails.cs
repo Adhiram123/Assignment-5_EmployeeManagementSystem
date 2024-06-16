@@ -165,7 +165,7 @@ namespace EmployeeManagementSystem.Controllers
                 package.SaveAs(stream);
                 stream.Position = 0;
 
-                var fileName = "Students.xlsx";
+                var fileName = "Employees.xlsx";
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml", fileName);
             }
         }
