@@ -14,5 +14,8 @@ namespace EmployeeManagementSystem.Interface
         Task<List<EmployeeBasicDTO>> GetAll();
         Task<List<EmployeeBasicDTO>> GetAllEmployeeByRole(string role);
         Task<EmployeeFilterCriteria> GetAllEmployeeByPaginatiion(EmployeeFilterCriteria employeeFilterCreteria);
+        Task<StudentModel> AddStudentByMakePostRequest(StudentModel studentModel);
+        Task<List<StudentModel>> GetStudentsByMakeGetRequest();
+        Task<StudentFilterCriteria> GetAllStudentsByPaginatiion(StudentFilterCriteria studentFilterCreteria);
     }
 }

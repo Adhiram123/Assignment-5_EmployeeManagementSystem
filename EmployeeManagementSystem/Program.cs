@@ -1,6 +1,7 @@
 using EmployeeManagementSystem.Common;
 using EmployeeManagementSystem.CosmosDb;
 using EmployeeManagementSystem.Interface;
+using EmployeeManagementSystem.ServiceFilter;
 using EmployeeManagementSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,9 @@ builder.Services.AddScoped<IAdditionInfo_Serivice, AdditionalInfo_Service>();
 builder.Services.AddScoped<IAddiitonalInfo_CosmosDb_Service, Additonalnfo_CosmosDb_Service>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddScoped<BuildStudentFilter>();
+builder.Services.AddScoped<BuildEmployeeFilter>();
+
 //builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 

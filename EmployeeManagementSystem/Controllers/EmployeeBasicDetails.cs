@@ -2,6 +2,7 @@
 using EmployeeManagementSystem.DTO;
 using EmployeeManagementSystem.Entites;
 using EmployeeManagementSystem.Interface;
+using EmployeeManagementSystem.ServiceFilter;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -179,12 +180,39 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(BuildEmployeeFilter))]
         public async Task<EmployeeFilterCriteria> GetAllEmployeesByPagination(EmployeeFilterCriteria employeeFilterCreteria)
         {
             var response = await _employeeService.GetAllEmployeeByPaginatiion(employeeFilterCreteria);
 
             return response;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudentByMakePostRequest(StudentModel studentModel)
+        {
+            var response = await _employeeService.AddStudentByMakePostRequest(studentModel);
+
+            return Ok(response);
+        
+        }
+
+        [HttpGet]
+        public async Task<List<StudentModel>> GetStudentByMakeGetRequest()
+        {
+            var response = await _employeeService.GetStudentsByMakeGetRequest();
+
+            return response;
+        }
+
+        [HttpPost]
+        [ServiceFilter(typeof(BuildStudentFilter))]
+        public async Task<StudentFilterCriteria> GetAllStudentsByPagination(StudentFilterCriteria studentFilterCreteria)
+        {
+            var response = await _employeeService.GetAllStudentsByPaginatiion(studentFilterCreteria);
+            return response;
+        }
+
 
     }
 }

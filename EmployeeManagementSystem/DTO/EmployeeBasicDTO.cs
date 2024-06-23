@@ -47,5 +47,8 @@ namespace EmployeeManagementSystem.DTO
 
         [JsonProperty(PropertyName = "address", NullValueHandling = NullValueHandling.Ignore)]
         public Address Address { get; set; }
+
+        [JsonProperty(PropertyName = "status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 }

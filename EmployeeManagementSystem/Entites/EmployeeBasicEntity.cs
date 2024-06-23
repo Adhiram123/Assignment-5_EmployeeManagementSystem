@@ -46,6 +46,8 @@ namespace EmployeeManagementSystem.Entites
         [JsonProperty(PropertyName = "role", NullValueHandling = NullValueHandling.Ignore)]
         public string Role { get; set; }
 
+        [JsonProperty(PropertyName = "status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
 
 
     }
@@ -66,6 +68,28 @@ namespace EmployeeManagementSystem.Entites
 
     }
     public class FilterCriteria
+    {
+        public string FieldName { get; set; }
+        public string FieldValue { get; set; }
+
+    }
+
+    public class StudentFilterCriteria
+    {
+        public StudentFilterCriteria()
+        {
+            Filters = new List<FilterCriteria>();
+            Students = new List<StudentModel>();
+        }
+        public int Page { get; set; } //Page Number
+        public int PageSize { get; set; }  //Number of records in one Page
+        public int TotalCount { get; set; } //Total records present In database
+        public List<FilterCriteria> Filters { get; set; } // filter Records
+
+        public List<StudentModel> Students { get; set; } //response
+
+    }
+    public class FilterCriteriaStudent
     {
         public string FieldName { get; set; }
         public string FieldValue { get; set; }
