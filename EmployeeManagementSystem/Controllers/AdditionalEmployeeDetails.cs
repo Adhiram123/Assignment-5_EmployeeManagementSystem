@@ -52,7 +52,7 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetEmployeeByBasicDetailsUid(string basicUid)
+        public async Task<IActionResult> GetAdditionalEmployeeByBasicDetailsUid(string basicUid)
         {
             var response = await _additionalService.GetEmployeeAdditionalDetailsByBasicDetailUid(basicUid);
 
