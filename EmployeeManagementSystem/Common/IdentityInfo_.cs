@@ -4,7 +4,7 @@ namespace EmployeeManagementSystem.Common
 {
     public class IdentityInfo_
     {
-        [JsonProperty(PropertyName = "PAN", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "pan", NullValueHandling = NullValueHandling.Ignore)]
         public string PAN { get; set; }
 
         [JsonProperty(PropertyName = "aadhar", NullValueHandling = NullValueHandling.Ignore)]

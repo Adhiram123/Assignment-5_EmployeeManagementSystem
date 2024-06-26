@@ -118,13 +118,13 @@ namespace EmployeeManagementSystem.Services
         public async Task<List<EmployeeBasicDTO>> GetAllEmployeeByRole(string role)
         {
             //get all the Elements
-            var allStudents = await GetAll();
+            var allEmployees = await GetAll();
             //2.filerasper role
-            return allStudents.FindAll(a => a.Role == role);
+            return allEmployees.FindAll(a => a.Role == role);
             //return
         }
 
-        /*  public async Task<EmployeeFilterCriteria> GetAllEmployeeByPaginatiion(EmployeeFilterCriteria employeeFilterCreteria)
+          public async Task<EmployeeFilterCriteria> GetAllEmployeeByPaginatiion(EmployeeFilterCriteria employeeFilterCreteria)
           {
               EmployeeFilterCriteria responseObject = new EmployeeFilterCriteria();
               var checkFilter = employeeFilterCreteria.Filters.Any(a => a.FieldName == "role");
@@ -135,7 +135,7 @@ namespace EmployeeManagementSystem.Services
               }
               var employees = await GetAll();
 
-              var filterRecords = employees.FindAll(a => a.Role == role);
+              var filterRecords = employees.FindAll(a => a.Role == "System");
 
               responseObject.TotalCount = employees.Count;
               responseObject.Page = employeeFilterCreteria.Page;
@@ -150,8 +150,8 @@ namespace EmployeeManagementSystem.Services
               }
               return responseObject;
 
-          }*/
-        public async Task<EmployeeFilterCriteria> GetAllEmployeeByPaginatiion(EmployeeFilterCriteria employeeFilterCreteria)
+          }
+        public async Task<EmployeeFilterCriteria> GetAllEmployeeByServiceFilter(EmployeeFilterCriteria employeeFilterCreteria)
         {
             EmployeeFilterCriteria responseObject = new EmployeeFilterCriteria();
             var checkFilter = employeeFilterCreteria.Filters.Any(a => a.FieldName == "status");
@@ -237,6 +237,26 @@ namespace EmployeeManagementSystem.Services
                 responseObject.Students.Add(item);
             }
             return responseObject;
+        }
+
+        public async Task<AdditionalInfoDTO> AddAdditionalByMakePostRequest(AdditionalInfoDTO additionalInfoDTO)
+        {
+            //Call AddAdditional employee Api by MakePostRequest
+            var serializeObj = JsonConvert.SerializeObject(additionalInfoDTO);
+            var requestObj = await HttpClientHelper.MakePostRequest(Credentials.AdditionalEmployeeUrl, Credentials.AdditionaEmployeeEndPoint, serializeObj);
+            var responseObj = JsonConvert.DeserializeObject<AdditionalInfoDTO>(requestObj);
+
+            return responseObj;
+        }
+
+        public async Task<List<AdditionalInfoDTO>> GetAdditionalEmployeeDetailsByMakeGetRequest()
+        {
+            AdditionalInfoDTO additionalInfoDto = new AdditionalInfoDTO();
+            var serializeObj = JsonConvert.SerializeObject(additionalInfoDto);
+            var requestObj = await HttpClientHelper.MakeGetRequest(Credentials.AdditionalEmployeeUrl, Credentials.AdditionaEmployeeGetAllEndPoint);
+            var responseObj = JsonConvert.DeserializeObject<List<AdditionalInfoDTO>>(requestObj);
+
+            return responseObj;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace EmployeeManagementSystem.Common
                 var httpResponse = httpClient.PostAsync(endpoint, apiRequestContent).Result;
 
                 var httpResponseString = httpResponse.Content.ReadAsStringAsync().Result;
+
                 if (!httpResponse.IsSuccessStatusCode)
                 {
                     throw new Exception(httpResponseString);

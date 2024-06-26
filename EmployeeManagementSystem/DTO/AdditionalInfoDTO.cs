@@ -28,7 +28,7 @@ namespace EmployeeManagementSystem.DTO
 
         public PersonalDetails_? PersonalDetails { get; set; }
 
-        [JsonProperty(PropertyName = "identityInfo", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "identityInformation", NullValueHandling = NullValueHandling.Ignore)]
 
         public IdentityInfo_? IdentityInformation { get; set; }
 

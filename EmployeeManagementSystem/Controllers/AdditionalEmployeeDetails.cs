@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.DTO;
+using EmployeeManagementSystem.Entites;
 using EmployeeManagementSystem.Interface;
 using EmployeeManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,14 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> GetEmployeeByBasicDetailsUid(string basicUid)
+        {
+            var response = await _additionalService.GetAllEmployeeByBasicUid(basicUid);
+
+            return Ok(response);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> UpdateDetailsOfAdditionalEmployeeDetails(AdditionalInfoDTO additionalInfoDto)
         {
 
@@ -68,6 +77,23 @@ namespace EmployeeManagementSystem.Controllers
             var response = await _additionalService.Delete(uid);
 
             return Ok("delete succserfully");
+        }
+
+        [HttpPost]
+      
+        public async Task<AdditionalEmployeelDetailsFilterCriteria> GetAllAdditionalEmployeeDetailsByPagination(AdditionalEmployeelDetailsFilterCriteria employeeFilterCreteria)
+        {
+            var response = await _additionalService.GetAllAdditionalEmployeeDetailsByPagination(employeeFilterCreteria);
+
+            return response;
+        }
+
+        [HttpGet]
+        public async Task<List<AdditionalInfoDTO>> GetAll()
+        {
+
+            var response = await _additionalService.GetAll();
+            return response;
         }
 
     }

@@ -4,6 +4,8 @@ using EmployeeManagementSystem.CosmosDb;
 using EmployeeManagementSystem.DTO;
 using EmployeeManagementSystem.Entites;
 using EmployeeManagementSystem.Interface;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace EmployeeManagementSystem.Services
 {
@@ -21,15 +23,19 @@ namespace EmployeeManagementSystem.Services
         {
             var emp = _mapper.Map<EmployeeAdditonalInfoEntity>(additonalInfoDto);
 
+            //Assign Mandatory Values
             BaseEntity.Initializer2(true, "Additional", "adhiram", emp);
-           
-            var reciveData = await _additionalInfo_CosmosDb_Service.GetAll();
+
+           // emp.EmployeeBasicDetailsUId ="hi";
+
+             var reciveData = await _additionalInfo_CosmosDb_Service.GetAll();
             bool ispresent = false;
             foreach(var Uid in reciveData)
             {
-                if(Uid.UId==emp.UId)
+                if(Uid.EmployeeBasicDetailsUId == emp.EmployeeBasicDetailsUId)
                 {
                     ispresent = true;
+                    break;
                 }
             }
             if (ispresent == false)
@@ -99,5 +105,53 @@ namespace EmployeeManagementSystem.Services
             return employeeadditionalDto;
         }
 
+        public async Task<List<AdditionalInfoDTO>> GetAll()
+        {
+            var response = await _additionalInfo_CosmosDb_Service.GetAll();
+            var employeeDto = new List<AdditionalInfoDTO>();
+            foreach (var emp in response)
+            {
+                var empDto = _mapper.Map<AdditionalInfoDTO>(emp);
+
+                employeeDto.Add(empDto);
+            }
+
+            return employeeDto;
+        }
+        public async Task<AdditionalEmployeelDetailsFilterCriteria> GetAllAdditionalEmployeeDetailsByPagination(AdditionalEmployeelDetailsFilterCriteria employeeFilterCreteria)
+        {
+            AdditionalEmployeelDetailsFilterCriteria responseObject = new AdditionalEmployeelDetailsFilterCriteria();
+            var checkFilter = employeeFilterCreteria.Filters.Any(a => a.FieldName == "Age");
+            var role = "";
+            if (checkFilter)
+            {
+                role = employeeFilterCreteria.Filters.Find(a => a.FieldName == "Age").FieldValue;
+            }
+            var employees = await GetAll();
+
+            var filterRecords = employees.FindAll(a => a.PersonalDetails.Age == "25");
+
+            responseObject.TotalCount = employees.Count;
+            responseObject.Page = employeeFilterCreteria.Page;
+            responseObject.PageSize = employeeFilterCreteria.PageSize;
+
+            var skip = employeeFilterCreteria.PageSize * (employeeFilterCreteria.Page - 1);
+            filterRecords = filterRecords.Skip(skip).Take(employeeFilterCreteria.PageSize).ToList();
+
+            foreach (var item in filterRecords)
+            {
+                responseObject.Employees.Add(item);
+            }
+            return responseObject;
+        }
+
+        public async Task<AdditionalInfoDTO> GetAllEmployeeByBasicUid(string basicUid)
+        {
+            //get all the Elements
+            var allEmployee = await GetAll();
+            //2.filerasper Uid
+            return allEmployee.Find(a => a.EmployeeBasicDetailsUId == basicUid);
+            //return
+        }
     }
 }

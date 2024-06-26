@@ -4,13 +4,13 @@ namespace EmployeeManagementSystem.Common
 {
     public class WorkInfo_
     {
-        [JsonProperty(PropertyName = "designatinName", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "designationName", NullValueHandling = NullValueHandling.Ignore)]
         public string DesignationName { get; set; }
 
         [JsonProperty(PropertyName = "departmentName", NullValueHandling = NullValueHandling.Ignore)]
         public string DepartmentName { get; set; }
 
-        [JsonProperty(PropertyName = "locatinName", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty(PropertyName = "locationName", NullValueHandling = NullValueHandling.Ignore)]
 
         public string LocationName { get; set; }
 
