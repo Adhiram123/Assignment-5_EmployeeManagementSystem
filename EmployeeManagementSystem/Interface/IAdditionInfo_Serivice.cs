@@ -9,7 +9,7 @@ namespace EmployeeManagementSystem.Interface
         Task<AdditionalInfoDTO> Delete(string uid);
         Task<List<AdditionalInfoDTO>> GetAll();
         Task<AdditionalEmployeelDetailsFilterCriteria> GetAllAdditionalEmployeeDetailsByPagination(AdditionalEmployeelDetailsFilterCriteria employeeFilterCreteria);
-        Task<AdditionalInfoDTO> GetAllEmployeeByBasicUid(string basicUid);
+        Task<AdditionalInfoDTO> GetEmployeeAdditionalDetailsByBasicDetailUid(string basicUid);
         Task<AdditionalInfoDTO> GetEmployeeByUid(string uid);
         Task<AdditionalInfoDTO> Update(AdditionalInfoDTO additionalInfoDto);
     }
