@@ -205,7 +205,7 @@ namespace EmployeeManagementSystem.Controllers
                      range.Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
                  }
 
-                 // Add student data
+                 // Add employee data
                  for (int i = 0; i < employees.Count; i++)
                  {
                      var emp = employees[i];
@@ -280,7 +280,7 @@ namespace EmployeeManagementSystem.Controllers
                     range.Style.Fill.BackgroundColor.SetColor(Color.LightBlue);
                 }
 
-                // Add student data
+                // Add employee data
                 for (int i = 0; i < employees.Count; i++)
                 {
                     var emp = employees[i];

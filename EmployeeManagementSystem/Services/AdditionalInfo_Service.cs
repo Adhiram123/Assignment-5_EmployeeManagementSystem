@@ -145,7 +145,7 @@ namespace EmployeeManagementSystem.Services
             return responseObject;
         }
 
-        public async Task<AdditionalInfoDTO> GetAllEmployeeByBasicUid(string basicUid)
+        public async Task<AdditionalInfoDTO> GetEmployeeAdditionalDetailsByBasicDetailUid(string basicUid)
         {
             //get all the Elements
             var allEmployee = await GetAll();
